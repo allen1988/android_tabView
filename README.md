@@ -4,6 +4,7 @@ android_tabView
 like ios UITabView，you can add your item
 your can use it easy.
 
+
 tabView = (TabView) findViewById(R.id.tabview);
   	List<String> list = new ArrayList<String>();
 		list.add("关于我们");
