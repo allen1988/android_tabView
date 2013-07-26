@@ -1,7 +1,10 @@
 android_tabView
 ===============
 
-like ios UITabView，you can add your item
+like ios UITabView，you can add your item;
+
+
+
 your can use it easy.
 
 
