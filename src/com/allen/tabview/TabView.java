@@ -7,16 +7,16 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
- * @package£ºcom.allen.tabview
- * @author£ºAllen
- * @email£ºjaylong1302@163.com
- * @data£º2013-7-26 ÏÂÎç2:48:36
- * @description£ºÔ²½Ç±í¸ñ
+ * @packageï¼šcom.allen.tabview
+ * @authorï¼šAllen
+ * @emailï¼šjaylong1302@163.com
+ * @dataï¼š2013-7-26 ä¸‹åˆ2:48:36
+ * @descriptionï¼šåœ†è§’è¡¨æ ¼
  */
 public class TabView extends LinearLayout {
 
 	TabAdapter adapter;
-	/** ×ÓÊÓÍ¼ÊýÁ¿ */
+	/** å­è§†å›¾æ•°é‡ */
 	int size = 0;
 
 	public TabView(Context context) {
@@ -35,28 +35,28 @@ public class TabView extends LinearLayout {
 		this.setBackgroundResource(R.drawable.background_view_rounded_container);
 	}
 
-	/** ÉèÖÃÊÊÅäÆ÷ */
+	/** è®¾ç½®é€‚é…å™¨ */
 	public void setAdapter(TabAdapter adapter) {
 		this.adapter = adapter;
-		// ±éÀúµ±Ç°µÄadapter
+		// éåŽ†å½“å‰çš„adapter
 		if (adapter != null) {
 			size = adapter.getCount();
-			if (size > 1) {// ¶àÏîÄÚÈÝ
+			if (size > 1) {// å¤šé¡¹å†…å®¹
 				for (int i = 0; i < size; i++) {
 					View child = adapter.getView(i);
-					if (i == 0) {// ¶¥²¿
+					if (i == 0) {// é¡¶éƒ¨
 						child.setBackgroundResource(R.drawable.background_view_rounded_top);
 						this.addView(child);
-					} else if (i > 0 && i < size - 1) {// ÖÐ¼ä
+					} else if (i > 0 && i < size - 1) {// ä¸­é—´
 						child.setBackgroundResource(R.drawable.background_view_rounded_middle);
 						this.addView(child);
-					} else if (i == size - 1) {// µ×²¿
+					} else if (i == size - 1) {// åº•éƒ¨
 						child.setBackgroundResource(R.drawable.background_view_rounded_bottom);
 						this.addView(child);
 					}
 
 				}
-			} else if (size == 1) {// Ò»ÏîÄÚÈÝ
+			} else if (size == 1) {// ä¸€é¡¹å†…å®¹
 				View child = adapter.getView(0);
 				child.setBackgroundResource(R.drawable.background_view_rounded_single);
 				this.addView(child);
@@ -65,15 +65,42 @@ public class TabView extends LinearLayout {
 
 	}
 
+	@Override
+	public void addView(View child) {
+		// TODO Auto-generated method stub
+		super.addView(child);
+		child.setClickable(true);
+	}
+
+	/** è°ƒç”¨addViewä¹‹åŽæ‰§è¡Œçš„æ–¹æ³• */
+	public void commit() {
+		int len = this.getChildCount();
+		if (len > 1) {// å¤šé¡¹å†…å®¹
+			for (int i = 0; i < len; i++) {
+				View child = this.getChildAt(i);
+				if (i == 0) {// é¡¶éƒ¨
+					child.setBackgroundResource(R.drawable.background_view_rounded_top);
+				} else if (i > 0 && i < len - 1) {// ä¸­é—´
+					child.setBackgroundResource(R.drawable.background_view_rounded_middle);
+				} else if (i == len - 1) {// åº•éƒ¨
+					child.setBackgroundResource(R.drawable.background_view_rounded_bottom);
+				}
+			}
+		} else if (len == 1) {// ä¸€é¡¹å†…å®¹
+			View child = this.getChildAt(0);
+			child.setBackgroundResource(R.drawable.background_view_rounded_single);
+		}
+	}
+
 	public interface TabItemClickListener {
-		void onClick(int position,View v);
+		void onClick(int position, View v);
 	}
 
 	TabItemClickListener itemClick;
 
 	public void setOnItemClickListener(final TabItemClickListener itemClick) {
 		this.itemClick = itemClick;
-		// °ó¶¨¼àÌýÊÂ¼þ
+		// ç»‘å®šç›‘å¬äº‹ä»¶
 		for (int i = 0; i < size; i++) {
 			final int index = i;
 			View childView = this.getChildAt(i);
@@ -83,7 +110,7 @@ public class TabView extends LinearLayout {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					if (itemClick != null) {
-						itemClick.onClick(index,v);
+						itemClick.onClick(index, v);
 					}
 				}
 			});
