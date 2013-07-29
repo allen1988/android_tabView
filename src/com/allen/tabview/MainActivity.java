@@ -3,8 +3,6 @@ package com.allen.tabview;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.allen.tabview.TabView.TabItemClickListener;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,9 +11,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.allen.tabview.TabView.TabItemClickListener;
+
 public class MainActivity extends Activity {
 
 	TabView tabView;
+	TabView tabView2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +24,11 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		tabView = (TabView) findViewById(R.id.tabview);
 		List<String> list = new ArrayList<String>();
-		list.add("¹ØÓÚÎÒÃÇ");
-		list.add("Òâ¼û·´À¡");
-		list.add("Ó¦ÓÃÍÆ¼ö");
-		list.add("Çå³ı»º´æ");
-		list.add("°æ±¾¸üĞÂ");
+		list.add("å…³äºæˆ‘ä»¬");
+		list.add("æ„è§åé¦ˆ");
+		list.add("åº”ç”¨æ¨è");
+		list.add("æ¸…é™¤ç¼“å­˜");
+		list.add("ç‰ˆæœ¬æ›´æ–°");
 		tabView.setAdapter(new MyTabAdapter(this, list));
 		tabView.setOnItemClickListener(new TabItemClickListener() {
 
@@ -36,28 +37,54 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				switch (position) {
 				case 0:
-					Toast.makeText(MainActivity.this, "¹ØÓÚÎÒÃÇ_item" + position, 0)
+					Toast.makeText(MainActivity.this, "å…³äºæˆ‘ä»¬_item" + position, 0)
 							.show();
 					break;
 				case 1:
-					Toast.makeText(MainActivity.this, "Òâ¼û·´À¡_item" + position, 0)
+					Toast.makeText(MainActivity.this, "æ„è§åé¦ˆ_item" + position, 0)
 							.show();
 					break;
 				case 2:
-					Toast.makeText(MainActivity.this, "Ó¦ÓÃÍÆ¼ö_item" + position, 0)
+					Toast.makeText(MainActivity.this, "åº”ç”¨æ¨è_item" + position, 0)
 							.show();
 					break;
 				case 3:
-					Toast.makeText(MainActivity.this, "Çå³ı»º´æ_item" + position, 0)
+					Toast.makeText(MainActivity.this, "æ¸…é™¤ç¼“å­˜_item" + position, 0)
 							.show();
 					break;
 				case 4:
-					Toast.makeText(MainActivity.this, "°æ±¾¸üĞÂ_item" + position, 0)
+					Toast.makeText(MainActivity.this, "ç‰ˆæœ¬æ›´æ–°_item" + position, 0)
 							.show();
 					break;
 				}
 			}
 		});
+		init2();
+	}
+
+	void init2() {
+		tabView2 = (TabView) findViewById(R.id.tabview2);
+		View view = LayoutInflater.from(this).inflate(R.layout.item, null);
+		TextView tv = (TextView) view.findViewById(R.id.tv);
+		tv.setText("ä¸­å›½ä¸Šæµ·");
+		tabView2.addView(view);
+
+		final View view2 = LayoutInflater.from(this).inflate(R.layout.item2,
+				null);
+		view2.findViewById(R.id.imageView1).setOnClickListener(
+				new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Toast.makeText(
+								MainActivity.this,
+								((TextView) view2.findViewById(R.id.tv))
+										.getText(), 0).show();
+					}
+				});
+		tabView2.addView(view2);
+		tabView2.commit();// å¿…é¡»è°ƒç”¨ï¼Œå¦åˆ™æ²¡æœ‰ç‚¹å‡»æ•ˆæœ
 	}
 
 	class MyTabAdapter extends TabAdapter {
