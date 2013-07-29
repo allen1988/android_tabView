@@ -41,26 +41,11 @@ public class TabView extends LinearLayout {
 		// 遍历当前的adapter
 		if (adapter != null) {
 			size = adapter.getCount();
-			if (size > 1) {// 多项内容
-				for (int i = 0; i < size; i++) {
-					View child = adapter.getView(i);
-					if (i == 0) {// 顶部
-						child.setBackgroundResource(R.drawable.background_view_rounded_top);
-						this.addView(child);
-					} else if (i > 0 && i < size - 1) {// 中间
-						child.setBackgroundResource(R.drawable.background_view_rounded_middle);
-						this.addView(child);
-					} else if (i == size - 1) {// 底部
-						child.setBackgroundResource(R.drawable.background_view_rounded_bottom);
-						this.addView(child);
-					}
-
-				}
-			} else if (size == 1) {// 一项内容
-				View child = adapter.getView(0);
-				child.setBackgroundResource(R.drawable.background_view_rounded_single);
+			for (int i = 0; i < size; i++) {
+				View child = adapter.getView(i);
 				this.addView(child);
 			}
+			commit();
 		}
 
 	}
